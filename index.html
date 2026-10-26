@@ -124,6 +124,19 @@
       .hero-actions .btn,.hero-actions .btn-secondary { width:100%; }
       .signup-card { padding:22px; }
     }
+
+    /* LR5: project-local photographs in the feature/images branch */
+    .visual > .hero-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+    .visual::before,.visual::after { display:none; }
+    .visual .float,.visual-caption { z-index:3; }
+    .visual-caption { text-shadow:0 1px 7px #000b; }
+    .route { position:relative; overflow:hidden; isolation:isolate; }
+    .route .route-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; }
+    .route::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(12,33,25,.86),rgba(12,33,25,.17)); z-index:-1; }
+    .route,.route.dark { color:white; background:#173b30; }
+    .route span { opacity:.9; }
+    .route h3,.route p { text-shadow:0 1px 4px #0007; }
+    @media(max-width:460px) { .route { min-height:280px; } }
   </style>
 </head>
 <body>
@@ -153,7 +166,7 @@
           <div class="trust"><div><strong>2 вида</strong>транспорта</div><div><strong>3 шага</strong>до первой поездки</div><div><strong>24/7</strong>демо-интерфейс</div></div>
         </div>
         <div class="visual" role="img" aria-label="Иллюстрация городского электросамоката">
-          <div class="orbit"><span class="vehicle">🛴</span></div>
+          <img class="hero-photo" src="images/hero-scooter.jpg" alt="Электросамокат на городской набережной на закате">
           <div class="float one"><span>⚡ Свободный маршрут</span><b>Твой темп</b></div>
           <div class="float two"><span>📍 Город рядом</span><b>Выбирай направление</b></div>
           <span class="visual-caption">MOVE BEYOND THE ORDINARY</span>
@@ -182,7 +195,7 @@
         <p class="note">* UrbanMove — демонстрационный учебный проект. Реальные цены, доступность транспорта и бронирование не реализованы.</p>
       </div>
     </section>
-    <section class="section" id="routes"><div class="container"><p class="section-kicker">Идеи для поездки</p><h2>В городе всегда есть<br>новый маршрут.</h2><div class="routes-grid"><article class="route"><div><span>СЦЕНАРИЙ 01</span><h3>Утро у набережной</h3><p>Начни день с движения и свежего воздуха.</p></div><div class="route-art">🚲</div></article><article class="route dark"><div><span>СЦЕНАРИЙ 02</span><h3>Дела без пробок</h3><p>Короткие расстояния — меньше лишнего ожидания.</p></div><div class="route-art">🛴</div></article></div></div></section>
+    <section class="section" id="routes"><div class="container"><p class="section-kicker">Идеи для поездки</p><h2>В городе всегда есть<br>новый маршрут.</h2><div class="routes-grid"><article class="route"><img class="route-photo" src="images/route-bike.jpg" alt="Велосипед на набережной у реки" loading="lazy"><div><span>СЦЕНАРИЙ 01</span><h3>Утро у набережной</h3><p>Начни день с движения и свежего воздуха.</p></div></article><article class="route dark"><img class="route-photo" src="images/route-scooter.jpg" alt="Поездка на электросамокате по городской улице" loading="lazy"><div><span>СЦЕНАРИЙ 02</span><h3>Дела без пробок</h3><p>Короткие расстояния — меньше лишнего ожидания.</p></div></article></div></div></section>
     <section class="section" id="faq"><div class="container"><p class="section-kicker">Частые вопросы</p><h2>Всё, что важно знать.</h2><div class="faq-list"><details><summary>UrbanMove — настоящий сервис аренды?</summary><p>Нет, это учебный прототип лендинга, созданный для демонстрации возможностей HTML, CSS, JavaScript и инструментов искусственного интеллекта.</p></details><details><summary>Можно ли забронировать транспорт?</summary><p>Пока нет. Интерфейс показывает концепцию продукта, но не подключён к реальному сервису аренды.</p></details><details><summary>Есть ли мобильная версия?</summary><p>Да. Страница адаптируется к ширине экрана, а для мобильных устройств предусмотрено компактное меню.</p></details><details><summary>Куда отправляются данные из формы?</summary><p>Никуда: форма работает в демонстрационном режиме и не передаёт данные на сервер.</p></details></div></div></section>
     <section class="section signup-section" id="signup"><div class="container signup-grid"><div><p class="section-kicker">Попробуй концепцию</p><h2>Планы меняются.<br>Ты — в движении.</h2><p class="section-lead">Оставь тестовую заявку, чтобы проверить, как работает интерфейс UrbanMove. Отправка данных на сервер не производится.</p></div><div class="signup-card"><form id="interest-form"><h3>Начни знакомство</h3><label for="person-name">Твоё имя</label><input id="person-name" name="name" type="text" required placeholder="Например, Алексей" aria-describedby="person-name-error" aria-invalid="false"><p id="person-name-error" aria-live="polite" hidden></p><label for="person-email">Электронная почта</label><input id="person-email" name="email" type="email" required placeholder="name@example.com"><label for="transport">Что тебе интереснее?</label><select id="transport" name="transport"><option>Электросамокат</option><option>Велосипед</option><option>Оба варианта</option></select><button class="btn" type="submit">Проверить заявку ↗</button><p class="form-note">Демо-форма: введённые данные не сохраняются и никуда не отправляются.</p><p id="form-status" aria-live="polite"></p></form></div></div></section>
   </main>
