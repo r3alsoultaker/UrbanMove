@@ -203,16 +203,45 @@
   <script>
     const menuToggle = document.querySelector('.menu-toggle');
     const menu = document.querySelector('#main-menu');
+
+    function closeMenu() {
+      menu.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = 'Меню ☰';
+    }
+
     menuToggle.addEventListener('click', () => {
       const open = menu.classList.toggle('open');
       menuToggle.setAttribute('aria-expanded', String(open));
       menuToggle.textContent = open ? 'Закрыть ✕' : 'Меню ☰';
     });
-    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-      menu.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.textContent = 'Меню ☰';
-    }));
+
+    // Закрытие при выборе пункта меню.
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+    // Клик вне меню и кнопки не должен оставлять меню открытым.
+    document.addEventListener('pointerdown', (event) => {
+      if (menu.classList.contains('open') &&
+          !menu.contains(event.target) &&
+          !menuToggle.contains(event.target)) {
+        closeMenu();
+      }
+    });
+
+    // Escape закрывает меню и возвращает фокус на кнопку.
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.classList.contains('open')) {
+        closeMenu();
+        menuToggle.focus();
+      }
+    });
+
+    // В CSS мобильная навигация действует до 800px включительно.
+    const desktopMedia = window.matchMedia('(min-width: 801px)');
+    desktopMedia.addEventListener('change', (event) => {
+      if (event.matches) closeMenu();
+    });
+
     const form = document.querySelector('#interest-form');
     const nameInput = document.querySelector('#person-name');
     const nameError = document.querySelector('#person-name-error');
